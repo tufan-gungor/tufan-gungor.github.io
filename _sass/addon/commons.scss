@@ -126,11 +126,6 @@ blockquote {
   @include prompt("danger", "\f071");
 }
 
-mjx-container {
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
 kbd {
   font-family: inherit;
   display: inline-block;
@@ -441,7 +436,7 @@ img[data-src] {
       margin-right: 2px;
     }
 
-    &:not([class]):hover {
+    &:hover {
       @extend %link-hover;
     }
   }

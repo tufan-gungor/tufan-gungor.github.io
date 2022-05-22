@@ -35,15 +35,14 @@ Steps to reproduce the behavior:
 
 <!-- If applicable, add screenshots to help explain your problem. -->
 
-### Environment
+### Software
 
-| Command                           | Version |
-|-----------------------------------|---------|
-| `ruby -v`                         |         |
-| `gem -v`                          |         |
-| `bundle -v`                       |         |
-| `bundle exec jekyll -v`           |         |
-| `bundle info jekyll-theme-chirpy` |         |
+<!-- Please complete the following information -->
+- Ruby version: <!-- by running: `ruby -v` -->
+- Gem version: <!-- by running: `gem -v`-->
+- Bundler version: <!-- by running: `bundle -v`-->
+- Jekyll version: <!-- by running: `bundle list | grep " jekyll "` -->
+- Theme version: <!-- by running: `gem list | grep jekyll-theme-chirpy` -->
 
 ### Desktop
 
