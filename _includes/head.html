@@ -110,7 +110,7 @@
 
   <script src="{{ site.data.assets[origin].jquery.js }}"></script>
 
-  {% unless site.theme_mode %}
+  {% if site.theme_mode %}
     {% include mode-toggle.html %}
-  {% endunless %}
+  {% endif %}
 </head>
