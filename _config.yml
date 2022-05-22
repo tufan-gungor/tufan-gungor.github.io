@@ -83,7 +83,7 @@ theme_mode:  # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: '/images/tufan_logo.png'
+avatar: '/assets/img/favicons/tufan_logo.jpg'
 
 # boolean type, the global switch for ToC in posts.
 toc: true
