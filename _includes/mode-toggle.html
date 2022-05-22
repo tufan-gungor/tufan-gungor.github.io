@@ -15,10 +15,12 @@
         if (this.isDarkMode) {
           if (!this.isSysDarkPrefer) {
             this.setDark();
+            console.log('line18 setDark')
           }
         } else {
           if (this.isSysDarkPrefer) {
             this.setLight();
+            console.log('line22 setLight')
           }
         }
       }
@@ -31,11 +33,13 @@
           if (self.isDarkMode) {
             if (!self.isSysDarkPrefer) {
               self.setDark();
+              console.log('line26 setDark')
             }
 
           } else {
             if (self.isSysDarkPrefer) {
               self.setLight();
+              console.log('line41 setLight')
             }
           }
 
