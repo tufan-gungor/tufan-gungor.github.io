@@ -1,7 +1,7 @@
 ---
 title: x86 Calling Conventions
 author: Tufan Gungor
-date: 2022-05-27 11:33:00 +0800
+date: 2022-05-27 00:00:00 +0800
 categories: [Reverse Engineering]
 tags: [reverse engineering]
 math: true
