@@ -8,8 +8,6 @@ math: true
 mermaid: true
 ---
 
-# x86 Calling Conventions
-
 In this article, we will talk about;
 
 - What is calling convention and how can we recognize these calling conventions ?
