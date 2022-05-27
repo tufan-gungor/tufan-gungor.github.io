@@ -1,8 +1,11 @@
 ---
 title: x86 Calling Conventions
-date: 2022-05-27 13:00:00 +/-TTTT
-categories: [Reverse Engineering, Assembly]
-tags: [reverse engineering]     # TAG names should always be lowercase
+author: Tufan Gungor
+date: 2022-05-27 11:33:00 +0800
+categories: [Reverse Engineering]
+tags: [reverse engineering]
+math: true
+mermaid: true
 ---
 
 # x86 Calling Conventions
