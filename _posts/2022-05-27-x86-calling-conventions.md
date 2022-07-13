@@ -1,5 +1,5 @@
 ---
-title: x86 Calling Conventions
+title: Calling Conventions for Reverse Engineers
 author: Tufan Gungor
 date: 2022-07-13 00:00:00 +0800
 categories: [Reverse Engineering]
@@ -8,10 +8,6 @@ math: true
 mermaid: true
 ---
 
-In this article, we will talk about;
-
-- What is calling convention and how can we recognize these calling conventions ?
-- Why are calling conventions important ?
 
 ## What is Calling Convention ?
 
@@ -66,7 +62,7 @@ After compiling this code, when we open it in a tool like Ghidra or IDA, it will
 - And in the second box, `0x14 (20) is added to the ESP`. As 5 arguments are sent to the stack and each argument takes up 4 bytes, `caller cleans the stack` 20 byte. `(2)`
 - In __cdecl, you will usually see the line `add esp,<area to be cleaned>,` 1 step after the function call.
 - And as seen in the last box, the `return value in EAX` is passed to the printf function to be printed. `(3)`
-- Also you can see that, the reverse engineering tools usually recognize calling functions. (Blue Underline in screenshot.) But we still won't trust the information there too much. We will examine the reason specifically under the "Why are calling conventions important ? " part.
+- Also you can see that, the reverse engineering tools usually recognize calling functions. (Blue Underline in screenshot.) But we still won't trust the information there too much. We will examine the reason specifically under the "Why are calling conventions important for reverse engineering ? " part.
 
 ### __stdcall
 
@@ -275,7 +271,7 @@ In this example, the `sumNumbers` function will add the numbers 3,5 and 8 sent b
 > When we compile the code we use in this example for `x64`, we get the same results.
 
 
-## Why are calling conventions important ?
+## Why are calling conventions important for reverse engineering ?
 
 To understand why calling conventions are important, let's take a step back and look again at our __fastcall example. We analyzed the code we compiled for our __fastcall example using IDA, and everything looked fine. This time, let's examine the same sample file in the Ghidra tool.
 
