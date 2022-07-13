@@ -1,5 +1,5 @@
 ---
-title: Calling Conventions for Reverse Engineers
+title: Calling Conventions for Reverse Engineering
 author: Tufan Gungor
 date: 2022-07-13 00:00:00 +0800
 categories: [Reverse Engineering]
