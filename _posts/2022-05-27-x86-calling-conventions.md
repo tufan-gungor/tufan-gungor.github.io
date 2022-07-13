@@ -1,7 +1,7 @@
 ---
 title: x86 Calling Conventions
 author: Tufan Gungor
-date: 2022-05-27 00:00:00 +0800
+date: 2022-07-13 00:00:00 +0800
 categories: [Reverse Engineering]
 tags: [reverse engineering]
 math: true
@@ -33,11 +33,11 @@ Also, developers can sometimes use custom calling conventions. For detailed info
 
 __cdecl (which stands for C declaration) is the default calling convention in C and C++. Therefore, you will come across this definition many times while reading assembly in tools such as IDA and Ghidra.
 
-Characteristics of **__cdecl:**
+Characteristics of `__cdecl:`
 
-1. Arguments are passed **on the stack in reverse order** (pushed right-to-left),
-2. **Caller** cleans the stack.
-3. The return value is stored in **EAX**.
+1. Arguments are passed `on the stack in reverse order` (pushed right-to-left),
+2. `Caller` cleans the stack.
+3. The return value is stored in `EAX`.
 
 Let's say we have a function called "sumNumbers" and it takes 5 integer arguments, then returns the sum of these numbers.
 
@@ -62,21 +62,21 @@ After compiling this code, when we open it in a tool like Ghidra or IDA, it will
 
 ![Untitled](/assets/img/calling_conventions/Untitled.png)
 
-- As seen in the first box, the arguments were passed to the stack in reverse order, then the function called. Which is the first key point to recognize __cdecl. **(1)**
-- And in the second box, **0x14 (20) is added to the ESP**. As 5 arguments are sent to the stack and each argument takes up 4 bytes, **caller cleans the stack** 20 byte. **(2)**
-- In __cdecl, you will usually see the line **add esp,<area to be cleaned>,** 1 step after the function call.
-- And as seen in the last box, the **return value in EAX** is passed to the printf function to be printed. **(3)**
+- As seen in the first box, the arguments were passed to the stack in reverse order, then the function called. Which is the first key point to recognize __cdecl. `(1)`
+- And in the second box, `0x14 (20) is added to the ESP`. As 5 arguments are sent to the stack and each argument takes up 4 bytes, `caller cleans the stack` 20 byte. `(2)`
+- In __cdecl, you will usually see the line `add esp,<area to be cleaned>,` 1 step after the function call.
+- And as seen in the last box, the `return value in EAX` is passed to the printf function to be printed. `(3)`
 - Also you can see that, the reverse engineering tools usually recognize calling functions. (Blue Underline in screenshot.) But we still won't trust the information there too much. We will examine the reason specifically under the "Why are calling conventions important ? " part.
 
 ### __stdcall
 
 __stdcall is the standard calling convention for Win32 API calls. __stdcall characteristics almost identical with __cdecl calling convention.
 
-Characteristics of **__stdcall:**
+Characteristics of `__stdcall:`
 
-1. Arguments are passed **on the stack in reverse order** (pushed right-to-left), → Same as __cdecl,
+1. Arguments are passed `on the stack in reverse order` (pushed right-to-left), → Same as __cdecl,
 2. Callee cleans the stack.
-3. The return value is stored in **EAX**. → Same as __cdecl.
+3. The return value is stored in `EAX`. → Same as __cdecl.
 
 As you can see, the only difference between __cdecl and __stdcall is that, in __cdecl calling convention caller cleans the stack, while in __stdcall calling convention callee cleans the stack.
 
@@ -130,9 +130,9 @@ After compiling this code, when we open it in a tool like Ghidra or IDA, it will
 
 ![Untitled](/assets/img/calling_conventions/Untitled%201.png)
 
-- As seen in the first box, the 5 parameters requested by the InternetOpenA API were **passed to the stack in reverse order**. **(1)**
-- In the second box, after the InternetOpenA **result is returned in EAX,** it is moved to the [ebp+hInternet] address and checked if it is equal to 0 or not. **(3)**
-- As a result, the caller did not take any action to clear the stack. Because the **callee (the InternetOpenA function itself) is responsible for stack cleaning**. **(2)**
+- As seen in the first box, the 5 parameters requested by the InternetOpenA API were `passed to the stack in reverse order`. `(1)`
+- In the second box, after the InternetOpenA `result is returned in EAX,` it is moved to the [ebp+hInternet] address and checked if it is equal to 0 or not. `(3)`
+- As a result, the caller did not take any action to clear the stack. Because the `callee (the InternetOpenA function itself) is responsible for stack cleaning`. `(2)`
 
 As we showed on Ghidra in the previous example, we can see the calling convention of this function on IDA as well. (Hover mouse over the function name.)
 
@@ -140,15 +140,15 @@ As we showed on Ghidra in the previous example, we can see the calling conventio
 
 ### __fastcall
 
-The main difference of __fastcall is that the initial arguments are passed to the registers instead of pushing to the stack. It’s faster to keep data in registers than in memory, so it’s called **FAST** call.
+The main difference of __fastcall is that the initial arguments are passed to the registers instead of pushing to the stack. It’s faster to keep data in registers than in memory, so it’s called `FAST` call.
 
-Characteristics of **__fastcall**:
+Characteristics of `__fastcall`:
 
 - First two or three parameters will be passed in the registers EDX, ECX or EAX, and additional parameters are passed on to the stack.
-- The return value is stored in **EAX**.
-- **Callee** cleans the stack.
+- The return value is stored in `EAX`.
+- `Callee` cleans the stack.
 
-*The first two DWORD or smaller arguments that are found in the argument list from left to right are passed in ECX and EDX registers; all other arguments are passed on the stack from right to left.* **(Microsoft)**
+*The first two DWORD or smaller arguments that are found in the argument list from left to right are passed in ECX and EDX registers; all other arguments are passed on the stack from right to left.* `(Microsoft)`
 
 Let’s compile the code below and analyze it in IDA.
 
@@ -173,26 +173,30 @@ int main()
 
 ![Untitled](/assets/img/calling_conventions/Untitled%203.png)
 
-- By looking at the first box, you can see that the **first 2 parameters are passed in the ECX and EDX** and the **other parameters are passed on to the stack**. **(1)**
-- In the second box, **return value stored in EAX** and passed to the printf function. **(2)**
-- We told that the **callee is responsible for stack cleaning (not registers)**, so in the last box you can see **caller** cleaning 8 bytes. 8/4=2 parameters. Which they are **ECX** and **EDX**.
+- By looking at the first box, you can see that the `first 2 parameters are passed in the ECX and EDX` and the `other parameters are passed on to the stack`. `(1)`
+- In the second box, `return value stored in EAX` and passed to the printf function. `(2)`
+- We told that the `callee is responsible for stack cleaning (not registers)`, so in the last box you can see `caller` cleaning 8 bytes. 8/4=2 parameters. Which they are `ECX` and `EDX`.
 
 To see how callee handles stack cleaning, let’s jump into that function;
 
 ![Untitled](/assets/img/calling_conventions/Untitled%204.png)
 
-- Since the first 2 arguments cleaned from ECX and EDX by caller, there is only 3 arguments left to be cleaned from stack. You can see in the box, **callee cleans up the stack** by using an operand to the **retn** instruction of **0Ch** (12). So the extra **12-bytes** (12/4 = 3 arguments) to be cleaned up **from stack** during the return operation.
+- Since the first 2 arguments cleaned from ECX and EDX by caller, there is only 3 arguments left to be cleaned from stack. You can see in the box, `callee cleans up the stack` by using an operand to the `retn` instruction of `0Ch` (12). So the extra `12-bytes` (12/4 = 3 arguments) to be cleaned up `from stack` during the return operation.
 - You can also see that IDA recognizes that this function uses the __fastcall calling convention.
+
+> __fastcall is the default calling convention for Windows x64 Application Binary Interface (ABI). Unlike x32, it sends the first four parameters to the registers `rcx`, `rdx`, `r8` and `r9`, and the remaining parameters to the `stack`.
+
+*Integer arguments are passed in registers RCX, RDX, R8, and R9. Floating point arguments are passed in XMM0L, XMM1L, XMM2L, and XMM3L. 16-byte arguments are passed by reference. Parameter passing is described in detail in Parameter passing. These registers, and RAX, R10, R11, XMM4, and XMM5, are considered volatile, or potentially changed by a callee on return.* `(Microsoft)`
 
 ### __thiscall
 
-The Microsoft-specific **__thiscall** calling convention is used on C++ class member functions on the x86 architecture. (passing the **“this”** object) 
+The Microsoft-specific `__thiscall` calling convention is used on C++ class member functions on the x86 architecture. (passing the `“this”` object) 
 
-Characteristics of **__thiscall**:
+Characteristics of `__thiscall`:
 
-- Arguments are passed **on the stack in reverse order** (pushed right-to-left).
-- The **“this”** object pointer is passed via **ECX** register**.**
-- **Callee** is responsible for stack cleanup.
+- Arguments are passed `on the stack in reverse order` (pushed right-to-left).
+- The `“this”` object pointer is passed via `ECX` register`.`
+- `Callee` is responsible for stack cleanup.
 
 Let’s compile a simple code to analyze __thiscall.
 
@@ -220,15 +224,56 @@ int main() {
 
 ![Untitled](/assets/img/calling_conventions/Untitled%205.png)
 
-- Parameters (100,200) are **passed to the stack in reverse order.** Actually, we called as (200,100)
-- The **“this”** object pointer stored in **ECX.**
+- Parameters (100,200) are `passed to the stack in reverse order.` Actually, we called as (200,100)
+- The `“this”` object pointer stored in `ECX.`
 
 To see where the stack cleaning job is done, let’s jump into the function.
 
 ![Untitled](/assets/img/calling_conventions/Untitled%206.png)
 
-- You can see in the box, **callee cleans up the stack** by using an operand to the **retn** instruction of **8**. So the extra **8-bytes** (8/4 = 2 arguments) to be cleaned up **from stack** during the return operation.
-- You can also see that IDA recognizes **__thiscall.**
+- You can see in the box, `callee cleans up the stack` by using an operand to the `retn` instruction of `8`. So the extra `8-bytes` (8/4 = 2 arguments) to be cleaned up `from stack` during the return operation.
+- You can also see that IDA recognizes `__thiscall.`
+
+## Calling Conventions in Golang
+Since Go is the most popular programming language lately, let's also examine how the calling conventions look in the Golang.
+
+Let's compile a simple code to analyze calling conventions in Golang.
+
+Since it is the fastest way for me, I compiled the code on a linux system using the following command.
+```bash
+env GOOS=windows GOARCH=386 go build -gcflags '-N -l' main.go
+```
+> We used `-gcflags '-N -l'` parameter to disable compiler optimization.
+
+```go
+package main
+
+import "fmt"
+
+func sumNumbers(num1, num2, num3 int) int {
+                return num1 + num2 + num3
+        }
+func main() {
+        var result int
+        num1 := 3
+        num2 := 5
+        num3 := 8
+        result = sumNumbers(num1, num2, num3)
+        fmt.Println(result)
+}
+```
+In this example, the `sumNumbers` function will add the numbers 3,5 and 8 sent by the `main` function and return the result, and the `main` function will print this result to the screen.
+
+
+![Untitled](/assets/img/calling_conventions/Untitled%208.png)
+
+* In the first step, we see that `68 bytes (44h)` are allocated in the stack before the operation is performed.
+* In the second step, the parameters are passed to the `stack` in `straight order`.
+* In the third step, the sumNumbers function is called and the result returned from the memory address [esp+0Ch] is moved to eax. This is important to us because unlike most other languages, `the result is returned in the stack, not the register`.
+* Finally, in the fourth step, we see that the `fmtPrintln` function is called to print the result on the screen, and then the space allocated in the stack for the parameters is cleared. This means that the stack is cleared by the `callee`.
+
+> When we compile the code we use in this example for `x64`, we get the same results.
+
 
 ## Why are calling conventions important ?
 
@@ -250,15 +295,15 @@ If you want to repeat the steps in this article, you can use 3 easy methods;
 
 ### 1. Use Online Compiler Explorer
 
-*Compiler Explorer is an interactive **online** compiler which shows the **assembly**  output of compiled C++, Rust, Go (and many more) code.*
+*Compiler Explorer is an interactive `online` compiler which shows the `assembly`  output of compiled C++, Rust, Go (and many more) code.*
 
 You can see the assembly output by copying the C++ codes used in this article and pasting them into [Compiler Explorer](https://godbolt.org/).
 
 Don’t forget the choose;
 
-Language: **C++**
+Language: `C++`
 
-Compiler: **x86 msvc v19.latest**
+Compiler: `x86 msvc v19.latest`
 
 > In this method, you will not see the calling convention. You can interpret it yourself by reading assembly.
 {: .prompt-warning }
@@ -272,7 +317,7 @@ The codes used in this article were compiled using Visual Studio 2022. You can c
 
 To disable ‘Compiler Optimization’ in Visual Studio follow the steps;
 
-- Project - ProjectName Properties - C/C++ - Optimization - Change Optimization to **Disabled**.
+- Project - ProjectName Properties - C/C++ - Optimization - Change Optimization to `Disabled`.
 
 ### 3. Download the Files Used in This Article
 
@@ -282,6 +327,7 @@ You can download the compiled version of all the codes used in this article from
 
 ## References
 
-1. [OALabs Youtube](https://www.youtube.com/watch?v=9lzW0I9_cpY) **(Patreon subscription is highly recommended!)**
+1. [OALabs Youtube](https://www.youtube.com/watch?v=9lzW0I9_cpY) `(Patreon subscription is highly recommended!)`
 2. [Microsoft Calling Conventions](https://docs.microsoft.com/en-us/cpp/cpp/calling-conventions?view=msvc-170)
 3. [Compiler Explorer](https://godbolt.org/)
+4. [The Go low-level calling convention on x86-64](https://dr-knz.net/go-calling-convention-x86-64.html)
