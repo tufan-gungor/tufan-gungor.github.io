@@ -20,8 +20,7 @@ An extensive search on VirusTotal using keywords such as `SerpentStealer` led to
 
 *Exeinfo output for Serpent.dll*
 
-| x64 .NET exe file with : 00 Entry Point - CPU : AMD64 - code size : 34.5 KB |
-| --- |
+`x64 .NET exe file with : 00 Entry Point - CPU : AMD64 - code size : 34.5 KB`
 
 The analysis of 'Serpent.dll' began with EXEinfo, which classified it as a .NET file. This led us to examine it in DNSpy, specifically the Main function. Initial observations revealed that the stealer followed a basic, almost 'copy/paste' methodology. Remarkably, it was devoid of complexities like obfuscation and encryption, leaving it unprotected and relatively simple in design.
 
@@ -351,7 +350,7 @@ Further investigations reveal that another tool developed by the same creator, k
 
 # Part 4 - Yara Rule / IOCs
 
-```python
+```c
 rule SerpentStealer {
 	meta:
 		author = "tufan - @tufan_gngr"
