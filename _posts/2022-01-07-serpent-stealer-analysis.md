@@ -351,13 +351,13 @@ Further investigations reveal that another tool developed by the same creator, k
 
 # Part 4 - Yara Rule / IOCs
 
-```yaml
+```python
 rule SerpentStealer {
-  meta:
-    author = "tufan - @tufan_gngr"
-    description = "Detects .NET based malware named Serpent Stealer"
-    date = "2024-01-07"
-    references = "https://tufan-gungor.github.io/"
+	meta:
+		author = "tufan - @tufan_gngr"
+		description = "Detects .NET based malware named Serpent Stealer"
+		date = "2024-01-07"
+		references = "https://tufan-gungor.github.io/"
 	strings:
 		$s1 = "serpent" ascii wide nocase
 		$s2 = "steamclient" ascii wide nocase
@@ -373,6 +373,7 @@ rule SerpentStealer {
 		uint32(uint32(0x3C)) == 0x00004550 and
 		5 of them
 }
+
 ```
 
 After implementing our custom Yara rule for detecting 'Serpent Stealer' in a Retrohunt on VirusTotal, the search yielded 38 instances of the malware. Subsequently, I compiled SHA256 IOCs of the 'Serpent Stealer' from Github contributions by fellow researchers and re-ran my Yara rule against this consolidated list. Impressively, there was a match for `38 out of the 44` hashes.
