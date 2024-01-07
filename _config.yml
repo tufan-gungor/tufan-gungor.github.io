@@ -23,10 +23,10 @@ timezone: Europe/Istanbul
 
 title: tufan.                          # the main title
 
-tagline: Malware Analysis & Reverse Engineering & Threat Hunting contents by independent security researcher.   # it will display as the sub-title
+tagline: Malware Analysis & Threat Intelligence   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  Malware Analysis & Reverse Engineering & Threat Hunting contents by independent security researcher.
+  Malware Analysis & Threat Intelligence
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://tufan-gungor.github.io'
