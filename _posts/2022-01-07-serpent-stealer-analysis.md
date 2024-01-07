@@ -29,7 +29,7 @@ The analysis of 'Serpent.dll' began with EXEinfo, which classified it as a .NET 
 
 A particular string within the Main function of `Serpent.dll` drew our attention; the function `steamClient.GetSteam()` included a hardcoded directory path `C:\\Users\\Aperx\\Desktop`. This detail suggests that the malware developer might have used this path for testing purposes and inadvertently left it in the code. We plan to leverage this specific string in our subsequent search for related samples.
 
-```jsx
+```text
 C:\\Users\\Aperx\\Desktop
 ```
 
@@ -43,7 +43,7 @@ The malware incorporates two distinct anti-analysis techniques: `AntiVT` and `An
 
 In its initial layer of defense, the malware uses an anti-analysis function named `AntiVT.IsVirusTotal()`. This function involves a simple yet specific check: it compares the computer's name with a predefined list of `126 names`, all hardcoded by the malware's creator. Should there be a match with any name in the list, the malware automatically ceases to function. This is a basic tactic to avoid analysis.
 
-```jsx
+```text
 "05h00Gi0",
 "3u2v9m8",
 "43By4",
@@ -178,7 +178,7 @@ In its initial layer of defense, the malware uses an anti-analysis function name
 
 The second anti-analysis function, `AntiAV.IsAvPresent()`, operates by cycling through the list of running processes and comparing them with a predefined set of `53 process names`. Despite its name suggesting a focus on anti-virus software, this function extends its reach to include various other processes, such as debuggers, malware analysis tools, and virtual machine processes, showcasing a broader scope of detection evasion.
 
-```jsx
+```text
 "ProcessHacker.exe",
 "httpdebuggerui.exe",
 "wireshark.exe",
@@ -252,13 +252,13 @@ Once it has gathered all the data set to be stolen, the Serpent Stealer initiate
 
 ![Untitled](/assets/img/serpent/6.png)
 
-```powershell
+```csharp
 public static string Webhook_link = "https://discord.com/api/webhooks/1156720932375756921/Xu5g1XzMRXTKDzrIOMcPMC1orYzXGQKBYTTRVOX4oR-IbivHh0LzqCucl2b-obrco6jj";
 ```
 
 This particular sample appears to be from the early stages of development, as evidenced by numerous informative messages within the malware's code. For instance, lines like 
 
-```powershell
+```csharp
 Console.WriteLine("[+] Program finished.");
 Console.WriteLine("[-] Target does not have FTP.");
 ```
@@ -317,7 +317,7 @@ Investigating its associations further, we notice a GitHub link listed under the
 
 ![Untitled](/assets/img/serpent/12.png)
 
-```powershell
+```text
 https://github.com/0xSerpent/Cobra
 ```
 
@@ -351,7 +351,7 @@ Further investigations reveal that another tool developed by the same creator, k
 
 # Part 4 - Yara Rule / IOCs
 
-```csharp
+```yaml
 rule SerpentStealer {
   meta:
     author = "tufan - @tufan_gngr"
@@ -381,7 +381,7 @@ Upon closer examination, we discovered why our match rate wasn't a complete 44/4
 
 ***Exela Stealer***
 
-```csharp
+```text
 1a4205058e912576a1de66af027cf53f32d862102108d556968647913cb778ce
 35fbbfeae68bcae26ad9bccc3b983862d27f2053b2706b4aa33d11acf9ab3aca
 6c14f5983ad0e4c9a31fcf3184332d9e4303f085bf866057f914990ea825fa52
@@ -393,7 +393,7 @@ a753967096145e7e8b0a3d2d4e952ae67f1c9a9974242fa3302287812de0f0ed
 
 ***Serpent Stealer***
 
-```csharp
+```text
 00b09f9e47986fcff9506c379e27b2361e40e46fc49c3c4d60c4a8402c857f62
 0edc6f2868e4759f541732d1e7ed6ee648736612bf5bf24f737971a65a558110
 212c4eba1bf5f695c563668c09cd3399d484d5bd5945edea97dc1ecbfd3a3eed
