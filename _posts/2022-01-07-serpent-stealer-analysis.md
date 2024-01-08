@@ -350,7 +350,7 @@ Further investigations reveal that another tool developed by the same creator, k
 
 # Part 4 - Yara Rule / IOCs
 
-```c
+```php
 rule SerpentStealer {
 	meta:
 		author = "tufan - @tufan_gngr"
@@ -358,15 +358,15 @@ rule SerpentStealer {
 		date = "2024-01-07"
 		references = "https://tufan-gungor.github.io/"
 	strings:
-		$s1 = "serpent" ascii wide nocase
-		$s2 = "steamclient" ascii wide nocase
-		$s3 = "steamapikey" ascii wide nocase
-		$s4 = "discordstealer" ascii wide nocase
-		$s5 = "historystealer" ascii wide nocase
-		$s6 = "Users\\Aperx" ascii wide nocase
-		$s7 = "passwordstealer" ascii wide nocase
-		$s8 = "bookmarkstealer" ascii wide nocase
-		$s9 = "autofillstealer" ascii wide nocase
+		$s1 = "serpent" nocase
+		$s2 = "steamclient" nocase
+		$s3 = "steamapikey" nocase
+		$s4 = "discordstealer" nocase
+		$s5 = "historystealer" nocase
+		$s6 = "Users\\Aperx" nocase
+		$s7 = "passwordstealer" nocase
+		$s8 = "bookmarkstealer" nocase
+		$s9 = "autofillstealer" nocase
 	condition:
 		uint16(0) == 0x5A4D and 
 		uint32(uint32(0x3C)) == 0x00004550 and
