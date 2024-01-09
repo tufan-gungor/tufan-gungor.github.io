@@ -264,6 +264,8 @@ Console.WriteLine("[-] Target does not have FTP.");
 
 suggest a debugging phase. Additionally, as previously mentioned, the hardcoded folder path `C:\Users\Aperx\Desktop` left in the malware indicates an oversight. These factors lead to the conclusion that this file was likely not ready for widespread distribution in a malware campaign and was still a work in progress.
 
+The absence of obfuscation, encryption, or any form of packing in this malware allows for a straightforward understanding of its capabilities just by examining its function names. Due to this simplicity, an in-depth analysis of each function is unnecessary. It is, in essence, a typical copy/paste .NET stealer.
+
 # Part 2 - Hunting for New Samples
 
 In Part 2 of our article, focused on Hunting for New Samples, we encounter a variety of specific strings within the 'Serpent Stealer' sample. Among these, `C:\\Users\\Aperx\\Desktop` emerges as particularly indicative of the developer's involvement. This string has guided our search efforts. 
