@@ -88,6 +88,8 @@ At this point, we have a few options:
 
 ## Analysis of Unpacked Sample
 
+After successfully unpacking the file using one of the recommended methods, we can proceed to analyze the unpacked sample in IDA.
+
 The function 'sub_7FF16612', called immediately in the WinMain function, primarily checks for the presence of a debugger. It begins by calling **`IsDebuggerPresent`** and **`CheckRemoteDebuggerPresent`** to detect debugging environments. Additionally, it employs a timing check using **`QueryPerformanceCounter`** and **`Sleep`** to identify unusually fast execution, which could indicate a debugger's presence. If any of these checks suggest debugging, the function triggers a breakpoint with **`__debugbreak`**. The use of multiple debugger detection techniques indicates a deliberate effort to hinder reverse engineering or analysis in a debugging environment.
 
 ![Untitled](/assets/img/neptune/12.png)
@@ -222,7 +224,7 @@ While examining the distinctive traits of the packed sample, several noteworthy 
 
 *Our YARA rule adopts a somewhat aggressive approach by verifying if the entropy of the specific section exceeds 7 and if its size surpasses 240,000. While it is possible to lower these thresholds in certain scenarios, doing so may increase the likelihood of encountering false positives.*
 
-```yaml
+```php
 import "pe"
 import "math"
 rule NeptuneLoader_Packed_Amber {
