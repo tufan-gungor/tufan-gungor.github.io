@@ -40,7 +40,7 @@ Our analysis will initially focus on this particular file.
 
 ![Untitled](/assets/img/neptune/4.png)
 
-****************SHA256: *2a3549512f5f9cf1b11a26897a79532adc548c3000fb7b07fcae6b49cd5222ad***
+**SHA256: *2a3549512f5f9cf1b11a26897a79532adc548c3000fb7b07fcae6b49cd5222ad***
 
 *Exeinfo output for Valorant_Cheat.exe*
 
