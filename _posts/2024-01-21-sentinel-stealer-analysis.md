@@ -39,7 +39,7 @@ In our analysis of the `Relations` tab for `sentinelware.net` on VirusTotal, we 
 
 Let's choose one of these files and begin our analysis.
 
-**SHA256: *4e8cb27f3b3b7ddf9e4276aa2902f25c37d12dc5e5ba54a7b9e2f190bfea96fc***
+**SHA256: *b177f7a7c764f96b6f60eea74014b18af23129f92c9ed34a76a46a0e111b5e26***
 
 *Exeinfo output for SentinelDummyMalware.exe*
 
