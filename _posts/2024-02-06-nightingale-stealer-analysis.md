@@ -918,7 +918,7 @@ logins.json
 encryptedUsername
 encryptedPassword
 hostname
-[^ -]
+[^ -]
 1
 metaData
 password
@@ -1510,7 +1510,7 @@ Matched: 'Wombat'
 Matched: 'Writing is not allowed'
 Matched: 'YubiKey'
 Matched: 'Zoho Vault'
-Matched: '[^ -]'
+Matched: '[^ -]'
 Matched: '\FileZilla'
 Matched: '\config'
 Matched: '].txt'
